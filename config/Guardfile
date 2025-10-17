@@ -1,0 +1,91 @@
+# A sample Guardfile
+# More info at https://github.com/guard/guard#readme
+
+## Uncomment and set this to only include directories you want to watch
+directories %w[app bin config db lib spec]
+  .select { |d| Dir.exist?(d) ? d : UI.warning("Directory #{d} does not exist") }
+
+# Note: The cmd option is now required due to the increasing number of ways
+#       rspec may be run, below are examples of the most common uses.
+#  * bundler: 'bundle exec rspec'
+#  * bundler binstubs: 'bin/rspec'
+#  * spring: 'bin/rspec' (This will use spring if running and you have
+#                          installed the spring binstubs per the docs)
+#  * zeus: 'zeus rspec' (requires the server to be started separately)
+#  * 'just' rspec: 'rspec'
+
+guard :rspec, cmd: "BUILD_FRONTEND=1 bundle exec rspec --format NyanCatFormatter" do
+  watch(%r{^spec/features/.*\.rb$}) do |m|
+    m[0]
+  end
+end
+
+guard :rspec, cmd: "bundle exec rspec --format NyanCatFormatter" do
+  require "guard/rspec/dsl"
+  dsl = Guard::RSpec::Dsl.new(self)
+
+  # Feel free to open issues for suggestions and improvements
+
+  # RSpec files
+  rspec = dsl.rspec
+  watch(rspec.spec_files) do |m|
+    next if m[0].match?(%r{^spec/features/})
+
+    m[0]
+  end
+
+  # Ruby files
+  ruby = dsl.ruby
+  dsl.watch_spec_files_for(ruby.lib_files)
+
+  # Rails files
+  rails = dsl.rails(view_extensions: %w[erb haml slim])
+  dsl.watch_spec_files_for(rails.app_files)
+  dsl.watch_spec_files_for(rails.views)
+
+  # GraphQL files
+  watch(%r{^app/graphql/(.+)\.rb$}) do |m|
+    rspec.spec.call "graphql/#{m[1]}"
+  end
+
+  # Custom matchers
+  watch(%r{^spec/support/matchers/(.+)\.rb$}) do |m|
+    rspec.spec.call "matchers/#{m[1]}"
+  end
+
+  watch(rails.controllers) do |m|
+    [
+      rspec.spec.call("routing/#{m[1]}_routing"),
+      rspec.spec.call("controllers/#{m[1]}_controller"),
+      rspec.spec.call("acceptance/#{m[1]}")
+    ]
+  end
+
+  # Rails config changes
+  watch(rails.routes) { "#{rspec.spec_dir}/routing" }
+  watch(rails.app_controller) { "#{rspec.spec_dir}/controllers" }
+
+  # Capybara features specs
+  watch(rails.view_dirs) { |m| rspec.spec.call("features/#{m[1]}") }
+  watch(rails.layouts) { |m| rspec.spec.call("features/#{m[1]}") }
+end
+
+guard :standardrb, fix: false, all_on_start: false, progress: false do
+  watch(/.+\.rb$/)
+end
+
+guard :process, name: "Generate GraphQL schema dump", command: "bin/rails graphql:schema:generate" do
+  watch(%r{^app/graphql/.+$})
+end
+
+guard :bundler do
+  require "guard/bundler"
+  require "guard/bundler/verify"
+  helper = Guard::Bundler::Verify.new
+
+  files = ["Gemfile"]
+  files += Dir["*.gemspec"] if files.any? { |f| helper.uses_gemspec?(f) }
+
+  # Assume files are symlinked from somewhere
+  files.each { |file| watch(helper.real_path(file)) }
+end
