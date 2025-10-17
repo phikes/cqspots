@@ -10,9 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_17_084546) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_17_085847) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "postgis"
+
+  create_table "spots", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "description"
+    t.boolean "wheelchair_accessible"
+    t.boolean "child_friendly"
+    t.boolean "parking"
+    t.boolean "crowded"
+    t.boolean "scenic"
+    t.boolean "sitting"
+    t.boolean "table"
+    t.boolean "sheltered"
+    t.boolean "trees"
+    t.boolean "rocky"
+    t.geography "lonlat", limit: {srid: 4326, type: "st_point", geographic: true}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lonlat"], name: "index_spots_on_lonlat", using: :gist
+    t.index ["user_id"], name: "index_spots_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "callsign"
@@ -31,4 +52,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_17_084546) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "spots", "users"
 end
