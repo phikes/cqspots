@@ -1,0 +1,144 @@
+type Mutation {
+  """
+  An example field added by the generator
+  """
+  testField: String!
+}
+
+"""
+An object with an ID.
+"""
+interface Node {
+  """
+  ID of the object.
+  """
+  id: ID!
+}
+
+"""
+Information about pagination in a connection.
+"""
+type PageInfo {
+  """
+  When paginating forwards, the cursor to continue.
+  """
+  endCursor: String
+
+  """
+  When paginating forwards, are there more items?
+  """
+  hasNextPage: Boolean!
+
+  """
+  When paginating backwards, are there more items?
+  """
+  hasPreviousPage: Boolean!
+
+  """
+  When paginating backwards, the cursor to continue.
+  """
+  startCursor: String
+}
+
+type Point {
+  x: Float!
+  y: Float!
+}
+
+type Query {
+  """
+  Fetches an object given its ID.
+  """
+  node(
+    """
+    ID of the object.
+    """
+    id: ID!
+  ): Node
+
+  """
+  Fetches a list of objects given a list of IDs.
+  """
+  nodes(
+    """
+    IDs of the objects.
+    """
+    ids: [ID!]!
+  ): [Node]!
+  spots(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+  ): SpotConnection!
+}
+
+type Spot implements Node {
+  childFriendly: Boolean!
+  crowded: Boolean!
+  description: String
+
+  """
+  ID of the object.
+  """
+  id: ID!
+  lonlat: Point!
+  parking: Boolean!
+  rocky: Boolean!
+  scenic: Boolean!
+  sheltered: Boolean!
+  sitting: Boolean!
+  table: Boolean!
+  trees: Boolean!
+  wheelchairAccessible: Boolean!
+}
+
+"""
+The connection type for Spot.
+"""
+type SpotConnection {
+  """
+  A list of edges.
+  """
+  edges: [SpotEdge]
+
+  """
+  A list of nodes.
+  """
+  nodes: [Spot]
+
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+}
+
+"""
+An edge in a connection.
+"""
+type SpotEdge {
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+
+  """
+  The item at the end of the edge.
+  """
+  node: Spot
+}

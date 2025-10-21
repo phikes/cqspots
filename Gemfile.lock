@@ -452,6 +452,7 @@ DEPENDENCIES
   devise
   factory_bot_rails
   faker
+  graphql
   guard
   guard-bundler
   guard-process

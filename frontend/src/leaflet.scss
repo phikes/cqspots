@@ -1,0 +1,9 @@
+@import "leaflet-loading/src/Control.Loading.css";
+@import "leaflet-geosearch/dist/geosearch.css";
+
+.leaflet-popup-content {
+  max-height: 400px;
+  max-width: 100vw;
+  overflow: scroll;
+  width: 600px;
+}
