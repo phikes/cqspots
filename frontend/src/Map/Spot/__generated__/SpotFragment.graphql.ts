@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<cd7c23e5d7e3784a2435e91f57fd9fd9>>
+ * @generated SignedSource<<a167944196efbe60173556e222fbc1db>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -22,6 +22,9 @@ export type SpotFragment$data = {
   readonly sitting: boolean;
   readonly table: boolean;
   readonly trees: boolean;
+  readonly user: {
+    readonly callsign: string | null | undefined;
+  };
   readonly wheelchairAccessible: boolean;
   readonly " $fragmentType": "SpotFragment";
 };
@@ -116,6 +119,24 @@ const node: ReaderFragment = {
     {
       "alias": null,
       "args": null,
+      "concreteType": "User",
+      "kind": "LinkedField",
+      "name": "user",
+      "plural": false,
+      "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "callsign",
+          "storageKey": null
+        }
+      ],
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
       "kind": "ScalarField",
       "name": "wheelchairAccessible",
       "storageKey": null
@@ -125,6 +146,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "4e192e522e3c506da5aa48cc18edfdb7";
+(node as any).hash = "e53bdfd3e54513d10fad63ebb61fb7a0";
 
 export default node;

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<27d695cf3fd9e0380849faf0edbfdc5c>>
+ * @generated SignedSource<<2833c9b6635bb600c219ac25bb1e684e>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -184,6 +184,24 @@ return {
                   {
                     "alias": null,
                     "args": null,
+                    "concreteType": "User",
+                    "kind": "LinkedField",
+                    "name": "user",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "callsign",
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
                     "kind": "ScalarField",
                     "name": "wheelchairAccessible",
                     "storageKey": null
@@ -273,12 +291,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "0b632cfb809149e4414a7d43dc123a1a",
+    "cacheID": "21eba9f8ff01568eebeb9fbb41a93f2f",
     "id": null,
     "metadata": {},
     "name": "MapPaginationQuery",
     "operationKind": "query",
-    "text": "query MapPaginationQuery(\n  $count: Int = 500\n  $cursor: String\n) {\n  ...MapQueryFragment_1G22uz\n}\n\nfragment MapQueryFragment_1G22uz on Query {\n  spots(first: $count, after: $cursor) {\n    edges {\n      node {\n        ...SpotFragment\n        lonlat {\n          x\n          y\n        }\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SpotFragment on Spot {\n  childFriendly\n  crowded\n  description\n  id\n  parking\n  rocky\n  scenic\n  sheltered\n  sitting\n  table\n  trees\n  wheelchairAccessible\n}\n"
+    "text": "query MapPaginationQuery(\n  $count: Int = 500\n  $cursor: String\n) {\n  ...MapQueryFragment_1G22uz\n}\n\nfragment MapQueryFragment_1G22uz on Query {\n  spots(first: $count, after: $cursor) {\n    edges {\n      node {\n        ...SpotFragment\n        lonlat {\n          x\n          y\n        }\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SpotFragment on Spot {\n  childFriendly\n  crowded\n  description\n  id\n  parking\n  rocky\n  scenic\n  sheltered\n  sitting\n  table\n  trees\n  user {\n    callsign\n  }\n  wheelchairAccessible\n}\n"
   }
 };
 })();

@@ -4,6 +4,7 @@ module Types
 
     field :description, String
     field :lonlat, PointType, null: false
+    field :user, UserType, null: false
 
     field :child_friendly, "Boolean!"
     field :crowded, "Boolean!"

@@ -24,6 +24,9 @@ fragment SpotFragment on Spot {
   sitting
   table
   trees
+  user {
+    callsign
+  }
   wheelchairAccessible
 }
 `
@@ -43,6 +46,7 @@ export const Spot = ({ spotRef }: Props) => {
   const spot = useFragment(spotFragment, spotRef)
 
   return <>
+    {spot.user.callsign && <p className="mt-0 mb-3"><small>Added by <a href={`https://qrz.com/db/${spot.user.callsign}`} target="_blank" rel="noopener noreferrer">{spot.user.callsign}</a></small></p>}
     <h1 className="h4">Details</h1>
     <div className={cx("d-flex gap-1 mb-3", Styles.icons)}>
       {spot.childFriendly && <Tooltip description="Child friendly"><GiBabyFace title="Child friendly" /></Tooltip>}

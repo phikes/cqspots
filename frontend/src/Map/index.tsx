@@ -11,6 +11,7 @@ import { Spot } from "./Spot"
 import { DataLoading } from "./DataLoading"
 import { Search } from "./Search"
 import "leaflet-loading"
+import { Controls } from "./Controls"
 
 export const MapQuery = graphql`
 query MapQuery {
@@ -60,6 +61,7 @@ export const Map = () => {
     <LocateControl />
     <DataLoading loading={isLoadingNext || hasNext} />
     <Search />
+    <Controls />
 
     <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -67,7 +69,7 @@ export const Map = () => {
       />
       {
         spots.map(({node, node: { lonlat: { x, y } }}) =>
-        <CircleMarker key={[x, y].join(",")} center={[x, y]} stroke={0} radius={5} fillOpacity={0.8}>
+        <CircleMarker key={[x, y].join(",")} center={[x, y]} stroke={0} radius={5} fillOpacity={0.9}>
           <Popup maxWidth={600}>
             <Spot spotRef={node} />
           </Popup>

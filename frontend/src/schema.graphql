@@ -105,6 +105,7 @@ type Spot implements Node {
   sitting: Boolean!
   table: Boolean!
   trees: Boolean!
+  user: User!
   wheelchairAccessible: Boolean!
 }
 
@@ -141,4 +142,8 @@ type SpotEdge {
   The item at the end of the edge.
   """
   node: Spot
+}
+
+type User {
+  callsign: String
 }

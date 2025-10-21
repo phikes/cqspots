@@ -75,6 +75,7 @@ GEM
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
+    ar_lazy_preload (2.1.0)
     ast (2.4.3)
     attr_extras (7.1.0)
     base64 (0.3.0)
@@ -446,6 +447,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-postgis-adapter
+  ar_lazy_preload
   bootsnap
   brakeman
   debug
