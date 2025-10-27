@@ -5,8 +5,8 @@ import { graphql, useFragment } from "react-relay"
 import { useCallback } from "react"
 import toast from "react-hot-toast"
 import { getErrorMessage } from "@/utils/getErrorMessage"
-import { useLogout } from "./useLogout"
-import { useNavigate } from "react-router"
+import { useLogout } from "@/hooks/useLogout"
+import { NavLink, useNavigate } from "react-router"
 
 const viewerFragment = graphql`
 fragment ControlsViewerFragment on User {
@@ -42,7 +42,7 @@ export const Controls = ({viewerRef}: Props) => {
     <div className="leaflet-top leaflet-right">
       <div className="d-flex gap-2 leaflet-control">
         <Button className="d-flex gap-1 align-items-center" size="sm" variant="primary"><FaPlus /> Add spot</Button>
-        {viewer && <Button size="sm" variant="primary">{viewer.callsign ?? viewer.email}</Button>}
+        {viewer && <NavLink className="btn btn-primary btn-sm text-light" to="/user/spots">{viewer.callsign ?? viewer.email}</NavLink>}
         {viewer && <Button onClick={doLogout} size="sm" variant="outline-primary">Log out</Button>}
         {!viewer && <Button onClick={navigateLogin} size="sm" variant="outline-primary">Log in</Button>}
       </div>

@@ -9,6 +9,9 @@ import { Signup } from "./Signup"
 import { Toaster } from "@/Toaster"
 import { ResetPassword } from "./ResetPassword"
 import { UpdatePassword } from "./UpdatePassword"
+import { User, query as userQuery } from "./User"
+import { Account } from "./Account"
+import { Spots } from "./Spots"
 
 const router = createBrowserRouter([
   {
@@ -32,6 +35,21 @@ const router = createBrowserRouter([
     path: "/updatepassword",
     Component: UpdatePassword
   },
+  {
+    path: "/user",
+    Component: User,
+    loader: async () => loadQuery(environment, userQuery, {}),
+    children: [
+      {
+        path: "/user/spots",
+        Component: Spots
+      },
+      {
+        path: "/user/account",
+        Component: Account
+      }
+    ]
+  }
 ])
 
 export const App = () => {

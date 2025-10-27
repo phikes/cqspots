@@ -1,5 +1,5 @@
 import Container from "react-bootstrap/Container"
-import { NavLink, useNavigate } from "react-router"
+import { NavLink } from "react-router"
 import { LoginForm, type Values } from "./LoginForm"
 import { useLogin } from "./useLogin"
 import { useCallback } from "react"
@@ -7,12 +7,11 @@ import toast from "react-hot-toast"
 
 export const Login = () => {
   const login = useLogin()
-  const navigate = useNavigate()
 
   const doLogin = useCallback(async (values: Values) => {
     try {
       await login(values)
-      navigate("/user/spots")
+      window.location.assign("/user/spots")
     } catch (error: any) {
       toast.error(error.message)
     }
