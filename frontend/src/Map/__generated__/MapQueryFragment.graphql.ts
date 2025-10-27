@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<d2fd3b1f7a2d34ae6a27666d3968e809>>
+ * @generated SignedSource<<6bf85fc5845219f5a5dac7ea12545412>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -19,8 +19,8 @@ export type MapQueryFragment$data = {
           readonly y: number;
         };
         readonly " $fragmentSpreads": FragmentRefs<"SpotFragment">;
-      } | null | undefined;
-    } | null | undefined> | null | undefined;
+      };
+    }>;
   };
   readonly " $fragmentType": "MapQueryFragment";
 };

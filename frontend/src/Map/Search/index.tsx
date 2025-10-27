@@ -4,7 +4,7 @@ import { GeoSearchControl, OpenStreetMapProvider  } from "leaflet-geosearch"
 import { useMap  } from "react-leaflet";
 
 export const Search = () => {
-  const searchControl = useMemo(() => new GeoSearchControl({
+  const searchControl = useMemo(() => new (GeoSearchControl as any)({
     provider: new OpenStreetMapProvider()
   }), [])
 

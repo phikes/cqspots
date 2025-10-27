@@ -5,15 +5,16 @@ import "leaflet/dist/leaflet.css"
 import { CircleMarker, MapContainer, Popup, TileLayer } from "react-leaflet"
 import { usePaginationFragment, usePreloadedQuery } from "react-relay"
 import { useLoaderData } from "react-router"
-import { type MapQuery as MapQueryType } from "./__generated__/MapQuery.graphql"
+import { type MapQuery, type MapQuery as MapQueryType } from "./__generated__/MapQuery.graphql"
 import { useEffect } from "react"
 import { Spot } from "./Spot"
 import { DataLoading } from "./DataLoading"
 import { Search } from "./Search"
 import "leaflet-loading"
 import { Controls } from "./Controls"
+import type { MapQueryFragment$key } from "./__generated__/MapQueryFragment.graphql"
 
-export const MapQuery = graphql`
+export const query = graphql`
 query MapQuery {
   ...MapQueryFragment
 }
@@ -43,14 +44,15 @@ fragment MapQueryFragment on Query
 `
 
 export const Map = () => {
-  const query = usePreloadedQuery<MapQueryType>(MapQuery, useLoaderData())
-  const {data: {spots: { edges: spots }}, loadNext, hasNext, isLoadingNext} = usePaginationFragment(queryFragment, query)
+  const queryRef = usePreloadedQuery<MapQueryType>(query, useLoaderData())
+  const {data: {spots: { edges: spots }}, loadNext, hasNext, isLoadingNext} = usePaginationFragment<MapQuery, MapQueryFragment$key>(queryFragment, queryRef)
 
   useEffect(() => {
-    loadNext()
+    loadNext(500)
   }, [hasNext, loadNext])
 
   return <MapContainer
+    // @ts-ignore
     center={[0, 0]}
     className={Styles.map}
     loadingControl
@@ -64,13 +66,21 @@ export const Map = () => {
     <Controls />
 
     <TileLayer
+      // @ts-ignore
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {
-        spots.map(({node, node: { lonlat: { x, y } }}) =>
-        <CircleMarker key={[x, y].join(",")} center={[x, y]} stroke={0} radius={5} fillOpacity={0.9}>
-          <Popup maxWidth={600}>
+        spots?.map(({node, node: { lonlat: { x, y } }}) =>
+        <CircleMarker
+          key={[x, y].join(",")}
+          center={[x, y]}
+          // @ts-ignore
+          radius={5}
+          fillOpacity={0.9}>
+          <Popup
+            // @ts-ignore
+            maxWidth={600}>
             <Spot spotRef={node} />
           </Popup>
         </CircleMarker>

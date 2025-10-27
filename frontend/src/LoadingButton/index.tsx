@@ -1,4 +1,4 @@
-import { Spinner } from "react-bootstrap"
+import Spinner from "react-bootstrap/Spinner"
 import Button, {type ButtonProps} from "react-bootstrap/Button"
 
 interface Props extends ButtonProps {

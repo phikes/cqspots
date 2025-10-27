@@ -116,12 +116,12 @@ type SpotConnection {
   """
   A list of edges.
   """
-  edges: [SpotEdge]
+  edges: [SpotEdge!]!
 
   """
   A list of nodes.
   """
-  nodes: [Spot]
+  nodes: [Spot!]!
 
   """
   Information to aid in pagination.
@@ -141,7 +141,7 @@ type SpotEdge {
   """
   The item at the end of the edge.
   """
-  node: Spot
+  node: Spot!
 }
 
 type User {

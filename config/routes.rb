@@ -1,12 +1,17 @@
+STATIC = Rack::Static.new(Rails.application, root: "public", urls: [""])
+
 Rails.application.routes.draw do
   post "/graphql", to: "graphql#execute"
-  devise_for :users, controllers: {confirmations: "users/confirmations", registrations: "users/registrations"}
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  devise_for :users, controllers: {confirmations: "users/confirmations", registrations: "users/registrations"}
+
   get "up" => "rails/health#show", :as => :rails_health_check
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  get "*", to: -> (env) do
+    env["PATH_INFO"] = "/index.html"
+
+    STATIC.call env
+  end
+
+  root to: -> (env) { [404, nil, nil] }
 end

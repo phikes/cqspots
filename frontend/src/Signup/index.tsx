@@ -25,7 +25,7 @@ export const Signup = () => {
   }, [signup])
 
   return <Container>
-    <h1>Sign up</h1>
+    <h1>Sign Up</h1>
     {success && <Alert>Thank you for signing up! We have sent you an email to confirm your account</Alert>}
     <SignupForm onSubmit={doSignup} ref={formikRef} />
     <hr />
