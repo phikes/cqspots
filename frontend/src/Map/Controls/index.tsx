@@ -1,9 +1,51 @@
 import Button from "react-bootstrap/Button"
 import { FaPlus } from "react-icons/fa"
+import type { ControlsViewerFragment$key } from "./__generated__/ControlsViewerFragment.graphql"
+import { graphql, useFragment } from "react-relay"
+import { useCallback } from "react"
+import toast from "react-hot-toast"
+import { getErrorMessage } from "@/utils/getErrorMessage"
+import { useLogout } from "./useLogout"
+import { useNavigate } from "react-router"
 
-export const Controls = () => {
-  return <div className="d-flex gap-2 leaflet-top leaflet-right p-2">
-    <Button className="d-flex gap-1 align-items-center" size="sm" variant="primary"><FaPlus /> Add spot</Button>
-    <Button size="sm" variant="primary">DL9PK</Button>
+const viewerFragment = graphql`
+fragment ControlsViewerFragment on User {
+  callsign
+  email
+}
+`
+
+interface Props {
+  viewerRef: ControlsViewerFragment$key | null | undefined
+}
+
+export const Controls = ({viewerRef}: Props) => {
+  const logout = useLogout()
+  const viewer = useFragment(viewerFragment, viewerRef)
+
+  const doLogout = useCallback(async () => {
+    if (!confirm("Are you sure you want to log out?")) return
+
+    try {
+      await logout()
+      window.location.reload()
+    } catch (error: any) {
+      if (error.message) toast.error(error.message)
+      else if (error.cause) toast.error(getErrorMessage(error.cause))
+    }
+  }, [])
+
+  const navigate = useNavigate()
+  const navigateLogin = useCallback(() => navigate("/login"), [])
+
+  return <div className="leaflet-control-container">
+    <div className="leaflet-top leaflet-right">
+      <div className="d-flex gap-2 leaflet-control">
+        <Button className="d-flex gap-1 align-items-center" size="sm" variant="primary"><FaPlus /> Add spot</Button>
+        {viewer && <Button size="sm" variant="primary">{viewer.callsign ?? viewer.email}</Button>}
+        {viewer && <Button onClick={doLogout} size="sm" variant="outline-primary">Log out</Button>}
+        {!viewer && <Button onClick={navigateLogin} size="sm" variant="outline-primary">Log in</Button>}
+      </div>
+    </div>
   </div>
 }

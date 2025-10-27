@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<192f06679862b0048c9b6ddd02cfed58>>
+ * @generated SignedSource<<9a6123a29b601268bac9914205e02be5>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -12,6 +12,9 @@ import { ConcreteRequest } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
 export type MapQuery$variables = Record<PropertyKey, never>;
 export type MapQuery$data = {
+  readonly viewer: {
+    readonly " $fragmentSpreads": FragmentRefs<"ControlsViewerFragment">;
+  } | null | undefined;
   readonly " $fragmentSpreads": FragmentRefs<"MapQueryFragment">;
 };
 export type MapQuery = {
@@ -26,7 +29,14 @@ var v0 = [
     "name": "first",
     "value": 500
   }
-];
+],
+v1 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "callsign",
+  "storageKey": null
+};
 return {
   "fragment": {
     "argumentDefinitions": [],
@@ -38,6 +48,22 @@ return {
         "args": null,
         "kind": "FragmentSpread",
         "name": "MapQueryFragment"
+      },
+      {
+        "alias": null,
+        "args": null,
+        "concreteType": "User",
+        "kind": "LinkedField",
+        "name": "viewer",
+        "plural": false,
+        "selections": [
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "ControlsViewerFragment"
+          }
+        ],
+        "storageKey": null
       }
     ],
     "type": "Query",
@@ -158,13 +184,7 @@ return {
                     "name": "user",
                     "plural": false,
                     "selections": [
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "callsign",
-                        "storageKey": null
-                      }
+                      (v1/*: any*/)
                     ],
                     "storageKey": null
                   },
@@ -256,20 +276,39 @@ return {
         "key": "Map_spots",
         "kind": "LinkedHandle",
         "name": "spots"
+      },
+      {
+        "alias": null,
+        "args": null,
+        "concreteType": "User",
+        "kind": "LinkedField",
+        "name": "viewer",
+        "plural": false,
+        "selections": [
+          (v1/*: any*/),
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
+            "name": "email",
+            "storageKey": null
+          }
+        ],
+        "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "f1d818aae13f2ce286a42435f2b5ae7c",
+    "cacheID": "5cf4392a235821c964ff31d5fa240a53",
     "id": null,
     "metadata": {},
     "name": "MapQuery",
     "operationKind": "query",
-    "text": "query MapQuery {\n  ...MapQueryFragment\n}\n\nfragment MapQueryFragment on Query {\n  spots(first: 500) {\n    edges {\n      node {\n        ...SpotFragment\n        lonlat {\n          x\n          y\n        }\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SpotFragment on Spot {\n  childFriendly\n  crowded\n  description\n  id\n  parking\n  rocky\n  scenic\n  sheltered\n  sitting\n  table\n  trees\n  user {\n    callsign\n  }\n  wheelchairAccessible\n}\n"
+    "text": "query MapQuery {\n  ...MapQueryFragment\n  viewer {\n    ...ControlsViewerFragment\n  }\n}\n\nfragment ControlsViewerFragment on User {\n  callsign\n  email\n}\n\nfragment MapQueryFragment on Query {\n  spots(first: 500) {\n    edges {\n      node {\n        ...SpotFragment\n        lonlat {\n          x\n          y\n        }\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SpotFragment on Spot {\n  childFriendly\n  crowded\n  description\n  id\n  parking\n  rocky\n  scenic\n  sheltered\n  sitting\n  table\n  trees\n  user {\n    callsign\n  }\n  wheelchairAccessible\n}\n"
   }
 };
 })();
 
-(node as any).hash = "b282f6a6f5b5d39ddc288c5d027de471";
+(node as any).hash = "e204da04597973e7b37b908104fdb8b3";
 
 export default node;

@@ -3,7 +3,7 @@ import { LocateControl } from "./LocateControl"
 import Styles from "./index.module.scss"
 import "leaflet/dist/leaflet.css"
 import { CircleMarker, MapContainer, Popup, TileLayer } from "react-leaflet"
-import { usePaginationFragment, usePreloadedQuery } from "react-relay"
+import { useFragment, usePaginationFragment, usePreloadedQuery } from "react-relay"
 import { useLoaderData } from "react-router"
 import { type MapQuery, type MapQuery as MapQueryType } from "./__generated__/MapQuery.graphql"
 import { useEffect } from "react"
@@ -17,6 +17,9 @@ import type { MapQueryFragment$key } from "./__generated__/MapQueryFragment.grap
 export const query = graphql`
 query MapQuery {
   ...MapQueryFragment
+  viewer {
+    ...ControlsViewerFragment
+  }
 }
 `
 
@@ -63,7 +66,7 @@ export const Map = () => {
     <LocateControl />
     <DataLoading loading={isLoadingNext || hasNext} />
     <Search />
-    <Controls />
+    <Controls viewerRef={queryRef.viewer} />
 
     <TileLayer
       // @ts-ignore

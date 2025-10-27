@@ -8,6 +8,7 @@ module Types
     # end
 
     field :spots, SpotType.connection_type, null: false
+    field :viewer, UserType, null: true
 
     def clusters(bounds:)
       spots = Spot.arel_table
@@ -95,6 +96,10 @@ module Types
 
     def spots
       Spot.all
+    end
+
+    def viewer
+      context[:current_user]
     end
   end
 end

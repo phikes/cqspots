@@ -86,6 +86,7 @@ type Query {
     """
     last: Int
   ): SpotConnection!
+  viewer: User
 }
 
 type Spot implements Node {
@@ -146,4 +147,5 @@ type SpotEdge {
 
 type User {
   callsign: String
+  email: String!
 }
