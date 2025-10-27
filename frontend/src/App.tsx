@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router"
 import "./bootstrap.scss"
 import "./leaflet.scss"
 import { Login } from "./Login"
+import { Signup } from "./Signup"
 import { Toaster } from "@/Toaster"
 
 const router = createBrowserRouter([
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     Component: Login
+  },
+  {
+    path: "/signup",
+    Component: Signup
   },
 ])
 

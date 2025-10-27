@@ -8,6 +8,10 @@ Bundler.require(*Rails.groups)
 
 module Cqspots
   class Application < Rails::Application
+    config.session_store :cookie_store, key: '_cqspots_session'
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use config.session_store, config.session_options
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
 

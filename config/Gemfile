@@ -52,6 +52,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "letter_opener"
   gem "guard"
   gem "guard-bundler", require: false
   gem "guard-process", require: false
