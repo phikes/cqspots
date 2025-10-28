@@ -148,4 +148,5 @@ type SpotEdge {
 type User {
   callsign: String
   email: String!
+  unconfirmedEmail: String
 }

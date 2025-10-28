@@ -53,7 +53,7 @@ export const User = () => {
   if (!viewer) return
 
   return <Container>
-    <h1>Welcome, {viewer.callsign ?? viewer.email}</h1>
+    <h1>Welcome, {viewer.callsign?.length ? viewer.callsign : viewer.email}</h1>
     <Nav variant="pills">
       <Nav.Item>
         <Nav.Link className="d-flex align-items-center gap-2" as={NavLink} to="/"><FaArrowLeft />{" "}Map</Nav.Link>

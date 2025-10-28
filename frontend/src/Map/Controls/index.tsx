@@ -42,7 +42,7 @@ export const Controls = ({viewerRef}: Props) => {
     <div className="leaflet-top leaflet-right">
       <div className="d-flex gap-2 leaflet-control">
         <Button className="d-flex gap-1 align-items-center" size="sm" variant="primary"><FaPlus /> Add spot</Button>
-        {viewer && <NavLink className="btn btn-primary btn-sm text-light" to="/user/spots">{viewer.callsign ?? viewer.email}</NavLink>}
+        {viewer && <NavLink className="btn btn-primary btn-sm text-light" to="/user/spots">{viewer.callsign?.length ? viewer.callsign : viewer.email}</NavLink>}
         {viewer && <Button onClick={doLogout} size="sm" variant="outline-primary">Log out</Button>}
         {!viewer && <Button onClick={navigateLogin} size="sm" variant="outline-primary">Log in</Button>}
       </div>
