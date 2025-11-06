@@ -29,6 +29,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_17_085847) do
     t.boolean "trees"
     t.boolean "rocky"
     t.geography "lonlat", limit: {srid: 4326, type: "st_point", geographic: true}, null: false
+    t.string "references", array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["lonlat"], name: "index_spots_on_lonlat", using: :gist

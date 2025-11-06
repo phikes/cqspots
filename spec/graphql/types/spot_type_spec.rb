@@ -5,6 +5,7 @@ RSpec.describe Types::SpotType, type: :graphql do
 
   it { is_expected.to have_field(:description).of_type "String" }
   it { is_expected.to have_field(:lonlat).of_type "Point!" }
+  it { is_expected.to have_field(:references).of_type "[String!]" }
 
   it { is_expected.to have_field(:child_friendly).of_type "Boolean!" }
   it { is_expected.to have_field(:crowded).of_type "Boolean!" }

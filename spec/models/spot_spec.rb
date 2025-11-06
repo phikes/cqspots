@@ -1,8 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Spot, type: :model do
   it { is_expected.to have_db_column(:description).of_type :text }
-  it { is_expected.to have_db_column(:lonlat).of_type(:geography).with_options null: false  }
+  it { is_expected.to have_db_column(:lonlat).of_type(:geography).with_options null: false }
+  it { is_expected.to have_db_column(:references).of_type(:string).with_options array: true }
 
   it { is_expected.to have_db_column(:child_friendly).of_type :boolean }
   it { is_expected.to have_db_column(:crowded).of_type :boolean }

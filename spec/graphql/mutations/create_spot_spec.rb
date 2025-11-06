@@ -11,6 +11,7 @@ RSpec.describe Mutations::CreateSpot, type: :graphql do
       lat: 13.123,
       long: 50.123,
       parking: true,
+      references: %w[DE-0173 DLFF-0703],
       rocky: false,
       scenic: true,
       sheltered: false,

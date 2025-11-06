@@ -6,6 +6,7 @@ module Mutations
     argument :lat, Float, required: true
     argument :long, Float, required: true
     argument :parking, Boolean, required: true
+    argument :references, [String], required: false
     argument :rocky, Boolean, required: true
     argument :scenic, Boolean, required: true
     argument :sheltered, Boolean, required: true

@@ -13,6 +13,7 @@ input CreateSpotInput {
   lat: Float!
   long: Float!
   parking: Boolean!
+  references: [String!]
   rocky: Boolean!
   scenic: Boolean!
   sheltered: Boolean!
@@ -138,6 +139,7 @@ type Spot implements Node {
   id: ID!
   lonlat: Point!
   parking: Boolean!
+  references: [String!]
   rocky: Boolean!
   scenic: Boolean!
   sheltered: Boolean!

@@ -14,6 +14,7 @@ class CreateSpots < ActiveRecord::Migration[8.0]
       t.boolean :trees
       t.boolean :rocky
       t.st_point :lonlat, geographic: true, null: false
+      t.string :references, array: true
 
       t.timestamps
       t.index :lonlat, using: :gist
