@@ -59,17 +59,21 @@ export const Spot = ({ spotRef }: Props) => {
       {spot.trees && <Tooltip description="Trees"><Icon icon="trees" /></Tooltip>}
       {spot.wheelchairAccessible && <Tooltip description="Wheelchair accessible"><Icon icon="wheelchairAccessible" /></Tooltip>}
     </div>
-    <h2 className="h5">Description</h2>
-    <Markdown>
+    {
+      (spot?.description?.length ?? 0) > 0 && <>
+      <h2 className="h5">Description</h2>
+      <Markdown>
       {spot.description}
     </Markdown>
-    <hr />
-    <DiscussionEmbed
-      config={{
-        identifier: spot.id,
-        url: `https://cqspots.com/spots/${spot.id}`,
-      }}
-      shortname="cqspots"
-    />
+  </>
+}
+<hr />
+<DiscussionEmbed
+  config={{
+    identifier: spot.id,
+    url: `https://cqspots.com/spots/${spot.id}`,
+  }}
+  shortname="cqspots"
+/>
 </>
 }
