@@ -30,9 +30,10 @@ export type Values = {
   childFriendly: boolean,
   crowded: boolean,
   description: string,
-  long: number | null,
-  lat: number | null
+  long: number | "",
+  lat: number | ""
   parking: boolean,
+  references: string
   rocky: boolean,
   scenic: boolean,
   sheltered: boolean,
@@ -43,7 +44,7 @@ export type Values = {
 }
 
 interface Props {
-  onSubmit: (values: Values) => Promise<void>
+  onSubmit: (values: Values & {lat: number, long: number}) => Promise<void>
 }
 
 export const SpotForm = ({onSubmit}: Props) => {
@@ -53,9 +54,10 @@ export const SpotForm = ({onSubmit}: Props) => {
     childFriendly: false,
     crowded: false,
     description: "",
-    lat: null,
-    long: null,
+    lat: "",
+    long: "",
     parking: false,
+    references: "",
     rocky: false,
     scenic: false,
     sheltered: false,
@@ -70,6 +72,7 @@ export const SpotForm = ({onSubmit}: Props) => {
   const childFriendlyId = useId()
   const crowdedId = useId()
   const parkingId = useId()
+  const referencesId = useId()
   const rockyId = useId()
   const scenicId = useId()
   const shelteredId = useId()
@@ -243,7 +246,13 @@ export const SpotForm = ({onSubmit}: Props) => {
             />
           </Col>
         </Row>
-        <h2 className="h4">Description</h2>
+        <h3 className="h5">References</h3>
+        <p className="text-muted">Add the POTA/SOTA/GMA/etc. references this spot covers, separated by commas</p>
+        <BootstrapForm.Group className="mb-3" controlId={referencesId}>
+          <Field as={BootstrapForm.Control} isInvalid={errors.references} name="references" />
+          <BootstrapForm.Control.Feedback type="invalid">{errors.references}</BootstrapForm.Control.Feedback>
+        </BootstrapForm.Group>
+        <h3 className="h5">Description</h3>
         <p className="text-muted">The description supports <a href="https://www.markdownguide.org/basic-syntax/" target="_blank" rel="noopener noreferrer">markdown</a> for formatting</p>
         <BootstrapForm.Control
           as="textarea"
@@ -255,7 +264,7 @@ export const SpotForm = ({onSubmit}: Props) => {
           value={description}
         />
 
-        <h3 className="h4">Preview</h3>
+        <h4 className="h6">Preview</h4>
         <div className="mb-3"><Markdown>{description}</Markdown></div>
         <LoadingButton loading={loading} type="submit">Create</LoadingButton>
       </Form>
