@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<a167944196efbe60173556e222fbc1db>>
+ * @generated SignedSource<<d7926b7d1c7232bcf77e0c8cb5a82384>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -16,6 +16,7 @@ export type SpotFragment$data = {
   readonly description: string | null | undefined;
   readonly id: string;
   readonly parking: boolean;
+  readonly references: ReadonlyArray<string> | null | undefined;
   readonly rocky: boolean;
   readonly scenic: boolean;
   readonly sheltered: boolean;
@@ -72,6 +73,13 @@ const node: ReaderFragment = {
       "args": null,
       "kind": "ScalarField",
       "name": "parking",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "references",
       "storageKey": null
     },
     {
@@ -146,6 +154,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "e53bdfd3e54513d10fad63ebb61fb7a0";
+(node as any).hash = "2428b611935ddb30e8b4a5b5221b582c";
 
 export default node;

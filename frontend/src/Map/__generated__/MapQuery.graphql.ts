@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<9a6123a29b601268bac9914205e02be5>>
+ * @generated SignedSource<<41408b63d08fe248c39b29cd8accc1d9>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -132,6 +132,13 @@ return {
                     "args": null,
                     "kind": "ScalarField",
                     "name": "parking",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "references",
                     "storageKey": null
                   },
                   {
@@ -299,12 +306,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "5cf4392a235821c964ff31d5fa240a53",
+    "cacheID": "6a4934e20a8a1b28d06ac7a0b4f3e6a8",
     "id": null,
     "metadata": {},
     "name": "MapQuery",
     "operationKind": "query",
-    "text": "query MapQuery {\n  ...MapQueryFragment\n  viewer {\n    ...ControlsViewerFragment\n  }\n}\n\nfragment ControlsViewerFragment on User {\n  callsign\n  email\n}\n\nfragment MapQueryFragment on Query {\n  spots(first: 500) {\n    edges {\n      node {\n        ...SpotFragment\n        lonlat {\n          x\n          y\n        }\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SpotFragment on Spot {\n  childFriendly\n  crowded\n  description\n  id\n  parking\n  rocky\n  scenic\n  sheltered\n  sitting\n  table\n  trees\n  user {\n    callsign\n  }\n  wheelchairAccessible\n}\n"
+    "text": "query MapQuery {\n  ...MapQueryFragment\n  viewer {\n    ...ControlsViewerFragment\n  }\n}\n\nfragment ControlsViewerFragment on User {\n  callsign\n  email\n}\n\nfragment MapQueryFragment on Query {\n  spots(first: 500) {\n    edges {\n      node {\n        ...SpotFragment\n        lonlat {\n          x\n          y\n        }\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SpotFragment on Spot {\n  childFriendly\n  crowded\n  description\n  id\n  parking\n  references\n  rocky\n  scenic\n  sheltered\n  sitting\n  table\n  trees\n  user {\n    callsign\n  }\n  wheelchairAccessible\n}\n"
   }
 };
 })();

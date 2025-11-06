@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<2833c9b6635bb600c219ac25bb1e684e>>
+ * @generated SignedSource<<90efe8ffb91b73db031cea0a477d7875>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -137,6 +137,13 @@ return {
                     "args": null,
                     "kind": "ScalarField",
                     "name": "parking",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "references",
                     "storageKey": null
                   },
                   {
@@ -291,12 +298,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "21eba9f8ff01568eebeb9fbb41a93f2f",
+    "cacheID": "e61b74f70f39a0be3295e4f2a50a0692",
     "id": null,
     "metadata": {},
     "name": "MapPaginationQuery",
     "operationKind": "query",
-    "text": "query MapPaginationQuery(\n  $count: Int = 500\n  $cursor: String\n) {\n  ...MapQueryFragment_1G22uz\n}\n\nfragment MapQueryFragment_1G22uz on Query {\n  spots(first: $count, after: $cursor) {\n    edges {\n      node {\n        ...SpotFragment\n        lonlat {\n          x\n          y\n        }\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SpotFragment on Spot {\n  childFriendly\n  crowded\n  description\n  id\n  parking\n  rocky\n  scenic\n  sheltered\n  sitting\n  table\n  trees\n  user {\n    callsign\n  }\n  wheelchairAccessible\n}\n"
+    "text": "query MapPaginationQuery(\n  $count: Int = 500\n  $cursor: String\n) {\n  ...MapQueryFragment_1G22uz\n}\n\nfragment MapQueryFragment_1G22uz on Query {\n  spots(first: $count, after: $cursor) {\n    edges {\n      node {\n        ...SpotFragment\n        lonlat {\n          x\n          y\n        }\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SpotFragment on Spot {\n  childFriendly\n  crowded\n  description\n  id\n  parking\n  references\n  rocky\n  scenic\n  sheltered\n  sitting\n  table\n  trees\n  user {\n    callsign\n  }\n  wheelchairAccessible\n}\n"
   }
 };
 })();

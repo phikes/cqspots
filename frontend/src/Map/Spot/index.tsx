@@ -9,6 +9,7 @@ import BootstrapTooltip from "react-bootstrap/Tooltip"
 import { DiscussionEmbed } from "disqus-react"
 import { Icon } from "@/Icon"
 import Markdown from "react-markdown"
+import { ReferenceLink } from "./ReferenceLink"
 
 const spotFragment = graphql`
 fragment SpotFragment on Spot {
@@ -17,6 +18,7 @@ fragment SpotFragment on Spot {
   description
   id
   parking
+  references
   rocky
   scenic
   sheltered
@@ -59,6 +61,16 @@ export const Spot = ({ spotRef }: Props) => {
       {spot.trees && <Tooltip description="Trees"><Icon icon="trees" /></Tooltip>}
       {spot.wheelchairAccessible && <Tooltip description="Wheelchair accessible"><Icon icon="wheelchairAccessible" /></Tooltip>}
     </div>
+    {
+      spot?.references && spot.references.length > 0 && <>
+      <h2 className="h5">References</h2>
+      <ul className="d-flex align-items-center list-inline">
+      {
+        spot.references.map((reference, index) => <li className="align-items-center d-inline-flex list-inline-item me-1" key={reference}><ReferenceLink reference={reference} />{index !== spot.references!.length - 1 && ","}</li>)
+      }
+      </ul>
+      </>
+    }
     {
       (spot?.description?.length ?? 0) > 0 && <>
       <h2 className="h5">Description</h2>
