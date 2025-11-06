@@ -1,15 +1,15 @@
 import { graphql } from "relay-runtime"
-import { LocateControl } from "./LocateControl"
+import { LocateControl } from "@/LocateControl"
 import Styles from "./index.module.scss"
 import "leaflet/dist/leaflet.css"
 import { CircleMarker, MapContainer, Popup, TileLayer } from "react-leaflet"
-import { useFragment, usePaginationFragment, usePreloadedQuery } from "react-relay"
+import { usePaginationFragment, usePreloadedQuery } from "react-relay"
 import { useLoaderData } from "react-router"
 import { type MapQuery, type MapQuery as MapQueryType } from "./__generated__/MapQuery.graphql"
 import { useEffect } from "react"
 import { Spot } from "./Spot"
 import { DataLoading } from "./DataLoading"
-import { Search } from "./Search"
+import { Search } from "@/Search"
 import "leaflet-loading"
 import { Controls } from "./Controls"
 import type { MapQueryFragment$key } from "./__generated__/MapQueryFragment.graphql"
@@ -58,6 +58,7 @@ export const Map = () => {
     // @ts-ignore
     center={[0, 0]}
     className={Styles.map}
+    // @ts-ignore
     loadingControl
     preferCanvas
     zoom={3}
@@ -77,7 +78,7 @@ export const Map = () => {
         spots?.map(({node, node: { lonlat: { x, y } }}) =>
         <CircleMarker
           key={[x, y].join(",")}
-          center={[x, y]}
+          center={[y, x]}
           // @ts-ignore
           radius={5}
           fillOpacity={0.9}>

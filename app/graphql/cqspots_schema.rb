@@ -1,4 +1,7 @@
 class CqspotsSchema < GraphQL::Schema
+  class UnauthenticatedError < StandardError; end
+  class UnauthorizedError < StandardError; end
+
   mutation(Types::MutationType)
   query(Types::QueryType)
 

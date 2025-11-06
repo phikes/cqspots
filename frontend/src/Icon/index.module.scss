@@ -1,0 +1,16 @@
+.icon {
+  font-size: 1.75rem;
+
+  img {
+    height: 1.75rem;
+    width: 1.75rem;
+  }
+
+  svg {
+    background: var(--bs-dark);
+
+    path {
+      fill: var(--bs-light);
+    }
+  }
+}
