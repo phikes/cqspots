@@ -21,9 +21,7 @@ class CqspotsSchema < GraphQL::Schema
 
   # Union and Interface Resolution
   def self.resolve_type(abstract_type, obj, ctx)
-    # TODO: Implement this method
-    # to return the correct GraphQL object type for `obj`
-    raise(GraphQL::RequiredImplementationMissingError)
+    "Types::#{obj.class.respond_to?(:base_class) ? obj.class.base_class : obj.class}Type".constantize
   end
 
   # Relay-style Object Identification:
@@ -37,16 +35,11 @@ class CqspotsSchema < GraphQL::Schema
     encoded_id = Base64.urlsafe_encode64(object_id)
     # Remove the "=" padding
     encoded_id = encoded_id.sub(/=+/, "")
-    # Add a type hint
-    type_hint = type_definition.graphql_name.first
-    "#{type_hint}_#{encoded_id}"
   end
 
   # Given a string UUID, find the object
-  def self.object_from_id(encoded_id_with_hint, query_ctx)
+  def self.object_from_id(encoded_id, query_ctx)
     # For example, use Rails' GlobalID library (https://github.com/rails/globalid):
-    # Split off the type hint
-    _type_hint, encoded_id = encoded_id_with_hint.split("_", 2)
     # Decode the ID
     id = Base64.urlsafe_decode64(encoded_id)
     # Rebuild it for Rails then find the object:

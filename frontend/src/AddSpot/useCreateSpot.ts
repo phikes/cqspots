@@ -42,7 +42,8 @@ export const useCreateSpot = () => {
       variables: {
         ...variables,
         connections: [
-          ConnectionHandler.getConnectionID("root", "Map_spots")
+          ConnectionHandler.getConnectionID("root", "Map_spots"),
+          ConnectionHandler.getConnectionID("root:viewer", "Spots_spots")
         ]
       }
     })

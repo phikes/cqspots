@@ -13,6 +13,7 @@ import { User, query as userQuery } from "./User"
 import { Account, query as accountQuery } from "./Account"
 import { Spots } from "./Spots"
 import { AddSpot } from "@/AddSpot"
+import { query as spotsQuery } from "./Spots"
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,7 @@ const router = createBrowserRouter([
       {
         path: "/user/spots",
         Component: Spots,
+        loader: async () => loadQuery(environment, spotsQuery, {}),
       },
       {
         path: "/user/account",

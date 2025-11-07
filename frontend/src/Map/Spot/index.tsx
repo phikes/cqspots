@@ -3,13 +3,11 @@ import Styles from "./index.module.scss"
 import { graphql } from "relay-runtime"
 import type { SpotFragment$key } from "./__generated__/SpotFragment.graphql"
 import { useFragment } from "react-relay"
-import OverlayTrigger from "react-bootstrap/OverlayTrigger"
-import { useId, type PropsWithChildren } from "react"
-import BootstrapTooltip from "react-bootstrap/Tooltip"
 import { DiscussionEmbed } from "disqus-react"
 import { Icon } from "@/Icon"
 import Markdown from "react-markdown"
 import { ReferenceLink } from "./ReferenceLink"
+import { Tooltip } from "@/Tooltip"
 
 const spotFragment = graphql`
 fragment SpotFragment on Spot {
@@ -31,13 +29,6 @@ fragment SpotFragment on Spot {
   wheelchairAccessible
 }
 `
-
-const Tooltip = ({ children, description }: PropsWithChildren<{description: string}>) => <OverlayTrigger
-  overlay={<BootstrapTooltip id={useId()}>{description}</BootstrapTooltip>}
-  placement="bottom"
->
-  <div>{children}</div>
-</OverlayTrigger>
 
 interface Props {
   spotRef: SpotFragment$key
