@@ -9,6 +9,30 @@ import { Icon } from "@/Icon"
 import { FormMap } from "./FormMap"
 import Markdown from "react-markdown"
 import { boolean, number, object, string } from "yup"
+import { graphql } from "relay-runtime"
+import { useFragment } from "react-relay"
+import type { SpotFormSpotFragment$key } from "./__generated__/SpotFormSpotFragment.graphql"
+
+const fragment = graphql`
+fragment SpotFormSpotFragment on Spot {
+  childFriendly
+  crowded
+  description
+  lonlat {
+    x
+    y
+  }
+  parking
+  references
+  rocky
+  scenic
+  sheltered
+  sitting
+  table
+  trees
+  wheelchairAccessible
+}
+`
 
 const validationSchema = object({
   childFriendly: boolean().required(),
@@ -17,6 +41,7 @@ const validationSchema = object({
   long: number().required("Longitude is required"),
   lat: number().required("Latitude is required"),
   parking: boolean().required(),
+  references: string(),
   rocky: boolean().required(),
   scenic: boolean().required(),
   sheltered: boolean().required(),
@@ -45,26 +70,28 @@ export type Values = {
 
 interface Props {
   onSubmit: (values: Values & {lat: number, long: number}) => Promise<void>
+  spotRef?: SpotFormSpotFragment$key | undefined | null
 }
 
-export const SpotForm = ({onSubmit}: Props) => {
+export const SpotForm = ({onSubmit, spotRef}: Props) => {
+  const spot = useFragment(fragment, spotRef)
   const [loading, loadingOnSubmit] = useLoading(onSubmit)
 
   const initialValues: Values = useMemo(() => ({
-    childFriendly: false,
-    crowded: false,
-    description: "",
-    lat: "",
-    long: "",
-    parking: false,
-    references: "",
-    rocky: false,
-    scenic: false,
-    sheltered: false,
-    sitting: false,
-    table: false,
-    trees: false,
-    wheelchairAccessible: false
+    childFriendly: spot?.childFriendly ?? false,
+    crowded: spot?.crowded ?? false,
+    description: spot?.description ?? "",
+    lat: spot?.lonlat.y ?? "",
+    long: spot?.lonlat.x ?? "",
+    parking: spot?.parking ?? false,
+    references: spot?.references?.join(", ") ?? "",
+    rocky: spot?.rocky ?? false,
+    scenic: spot?.scenic ?? false,
+    sheltered: spot?.sheltered ?? false,
+    sitting: spot?.sitting ?? false,
+    table: spot?.table ?? false,
+    trees: spot?.trees ?? false,
+    wheelchairAccessible: spot?.wheelchairAccessible ?? false
   }), [])
 
   const latId = useId()
@@ -86,7 +113,7 @@ export const SpotForm = ({onSubmit}: Props) => {
       ({errors, handleBlur, handleChange, values: {description}}) => <Form>
         <h2 className="h4">Location</h2>
         <p className="text-muted">Click on the map to place the spot</p>
-        <div className="mb-3"><FormMap /></div>
+        <div className="mb-3"><FormMap center={initialValues.lat && initialValues.long ? [initialValues.lat, initialValues.long] : [0, 0]} /></div>
         <Row>
           <Col>
             <BootstrapForm.Group className="mb-3" controlId={longId}>
@@ -266,7 +293,7 @@ export const SpotForm = ({onSubmit}: Props) => {
 
         <h4 className="h6">Preview</h4>
         <div className="mb-3"><Markdown>{description}</Markdown></div>
-        <LoadingButton loading={loading} type="submit">Create</LoadingButton>
+        <LoadingButton loading={loading} type="submit">{spot ? "Update" : "Create"}</LoadingButton>
       </Form>
     }
   </Formik>

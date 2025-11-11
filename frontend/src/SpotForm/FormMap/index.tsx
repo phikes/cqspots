@@ -7,7 +7,11 @@ import { useFormikContext } from "formik"
 import { type Values } from ".."
 import { PlaceMarker } from "./PlaceMarker"
 
-export const FormMap = () => {
+interface Props {
+  center: [number, number]
+}
+
+export const FormMap = ({ center }: Props) => {
   const { setFieldValue, values: { lat, long } } = useFormikContext<Values>()
 
   const markerRef = useRef<any>(null)
@@ -25,7 +29,7 @@ export const FormMap = () => {
 
   return <MapContainer
     // @ts-ignore
-    center={[0, 0]}
+    center={center}
     className={Styles.map}
     // @ts-ignore
     loadingControl

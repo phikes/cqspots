@@ -11,9 +11,9 @@ import { ResetPassword } from "./ResetPassword"
 import { UpdatePassword } from "./UpdatePassword"
 import { User, query as userQuery } from "./User"
 import { Account, query as accountQuery } from "./Account"
-import { Spots } from "./Spots"
+import { Spots, query as spotsQuery } from "./Spots"
 import { AddSpot } from "@/AddSpot"
-import { query as spotsQuery } from "./Spots"
+import { EditSpot, query as EditSpotQuery } from "./EditSpot"
 
 const router = createBrowserRouter([
   {
@@ -46,6 +46,11 @@ const router = createBrowserRouter([
       {
         path: "/user/spots/add",
         Component: AddSpot,
+      },
+      {
+        path: "/user/spots/:id",
+        Component: EditSpot,
+        loader: async ({ params: {id} }) => loadQuery(environment, EditSpotQuery, {id}),
       },
       {
         path: "/user/spots",

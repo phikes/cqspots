@@ -7,6 +7,8 @@ import { FaTrash } from "react-icons/fa"
 import { LoadingButton } from "@/LoadingButton"
 import { useDeleteSpot } from "./useDeleteSpot"
 import { useCallback, useEffect, useState } from "react"
+import { FaPencil } from "react-icons/fa6"
+import { NavLink } from "react-router"
 
 const fragment = graphql`
 fragment SpotListSpotFragment on SpotEdge @relay(plural: true) {
@@ -85,7 +87,8 @@ export const SpotList = ({spotsRef}: Props) => {
             </div>
           </td>
           <td>
-            <LoadingButton className="p-0" loading={deleteLoading && deletingSpot === id} onClick={doDeleteSpot(id)} variant="link"><FaTrash title="Delete" /></LoadingButton>
+            <NavLink className="p-0 btn btn-link btn-sm me-1" to={`/user/spots/${id}`}><FaPencil title="Edit" /></NavLink>
+            <LoadingButton className="p-0" loading={deleteLoading && deletingSpot === id} onClick={doDeleteSpot(id)} size="sm" variant="link"><FaTrash title="Delete" /></LoadingButton>
           </td>
         </tr>)
       }
