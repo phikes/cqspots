@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<5fe97396511a438487cd14e6adf574bc>>
+ * @generated SignedSource<<8676b3c7ee210c47153f1d1120ca98fb>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -298,16 +298,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "a1bc7c2af8b2de7a7468776c81e569ad",
+    "cacheID": "318c2d26e8f1f0bdb040f39a29b3a10d",
     "id": null,
     "metadata": {},
     "name": "MapPaginationQuery",
     "operationKind": "query",
-    "text": "query MapPaginationQuery(\n  $count: Int = 500\n  $cursor: String\n) {\n  ...MapQueryFragment_1G22uz\n}\n\nfragment MapQueryFragment_1G22uz on Query {\n  spots(first: $count, after: $cursor) {\n    edges {\n      node {\n        ...SpotFragment\n        id\n        lonlat {\n          x\n          y\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SpotFragment on Spot {\n  childFriendly\n  crowded\n  description\n  id\n  parking\n  references\n  rocky\n  scenic\n  sheltered\n  sitting\n  table\n  trees\n  user {\n    callsign\n  }\n  wheelchairAccessible\n}\n"
+    "text": "query MapPaginationQuery(\n  $count: Int = 500\n  $cursor: String\n) {\n  ...MapQueryFragment_1G22uz\n}\n\nfragment MapQueryFragment_1G22uz on Query {\n  spots(first: $count, after: $cursor) {\n    edges {\n      node {\n        ...SpotFragment\n        id\n        lonlat {\n          x\n          y\n        }\n        references\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SpotFragment on Spot {\n  childFriendly\n  crowded\n  description\n  id\n  parking\n  references\n  rocky\n  scenic\n  sheltered\n  sitting\n  table\n  trees\n  user {\n    callsign\n  }\n  wheelchairAccessible\n}\n"
   }
 };
 })();
 
-(node as any).hash = "89e0f29afd995c2946f422eec2a78f31";
+(node as any).hash = "ae7befc7d0c251c5c8d7dd91aa5e9828";
 
 export default node;
