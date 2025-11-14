@@ -55,10 +55,9 @@ export const Map = () => {
   }, [hasNext, loadNext])
 
   return <MapContainer
-    // @ts-ignore
     center={[0, 0]}
     className={Styles.map}
-    // @ts-ignore
+    // @ts-expect-error Otherwise no loading control
     loadingControl
     preferCanvas
     zoom={3}
@@ -70,7 +69,6 @@ export const Map = () => {
     <Controls viewerRef={queryRef.viewer} />
 
     <TileLayer
-      // @ts-ignore
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
@@ -79,11 +77,9 @@ export const Map = () => {
         <CircleMarker
           key={[x, y].join(",")}
           center={[y, x]}
-          // @ts-ignore
           radius={5}
           fillOpacity={0.9}>
           <Popup
-            // @ts-ignore
             maxWidth={600}>
             <Spot spotRef={node} />
           </Popup>

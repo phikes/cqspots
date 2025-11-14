@@ -9,7 +9,11 @@ export const LocateControl = () => {
 
   useEffect(() => {
     map.addControl(locateControl)
-  }, [map])
+
+    return () => {
+      map.removeControl(locateControl)
+    }
+  }, [locateControl, map])
 
   return null
 }

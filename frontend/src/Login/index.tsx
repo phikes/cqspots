@@ -12,7 +12,7 @@ export const Login = () => {
     try {
       await login(values)
       window.location.assign("/user/spots")
-    } catch (error: any) {
+    } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
       toast.error(error.message)
     }
   }, [login])

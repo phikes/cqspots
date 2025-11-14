@@ -4,6 +4,7 @@ import { GeoSearchControl, OpenStreetMapProvider  } from "leaflet-geosearch"
 import { useMap  } from "react-leaflet";
 
 export const Search = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const searchControl = useMemo(() => new (GeoSearchControl as any)({
     provider: new OpenStreetMapProvider()
   }), [])
@@ -16,7 +17,7 @@ export const Search = () => {
     return () => {
       map.removeControl(searchControl)
     }
-  }, [map]);
+  }, [searchControl, map]);
 
   return null
 }

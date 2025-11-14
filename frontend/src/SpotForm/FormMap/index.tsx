@@ -6,6 +6,7 @@ import { useMemo, useRef } from "react"
 import { useFormikContext } from "formik"
 import { type Values } from ".."
 import { PlaceMarker } from "./PlaceMarker"
+import type { Marker as LeafletMarker } from "leaflet"
 
 interface Props {
   center: [number, number]
@@ -14,7 +15,7 @@ interface Props {
 export const FormMap = ({ center }: Props) => {
   const { setFieldValue, values: { lat, long } } = useFormikContext<Values>()
 
-  const markerRef = useRef<any>(null)
+  const markerRef = useRef<LeafletMarker>(null)
   const eventHandlers = useMemo(() => ({
     dragend: () => {
       if (markerRef.current === null) return
@@ -28,10 +29,9 @@ export const FormMap = ({ center }: Props) => {
   const position: ([number, number] | null) = useMemo(() => typeof lat === "number" && typeof long === "number" ? [lat, long] : null, [lat, long])
 
   return <MapContainer
-    // @ts-ignore
     center={center}
     className={Styles.map}
-    // @ts-ignore
+    // @ts-expect-error Loading control otherwise is not available
     loadingControl
     preferCanvas
     zoom={3}
@@ -43,7 +43,6 @@ export const FormMap = ({ center }: Props) => {
   {
     position &&
     <Marker
-      // @ts-ignore
       draggable
       eventHandlers={eventHandlers}
       position={position}
@@ -52,7 +51,6 @@ export const FormMap = ({ center }: Props) => {
   }
 
   <TileLayer
-    // @ts-ignore
     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />

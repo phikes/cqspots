@@ -15,11 +15,11 @@ export const UpdatePassword = () => {
       await updatePassword(values)
       toast.success("Your password was successfully reset. You can now log in.")
       navigate("/login")
-    } catch (error: any) {
+    } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
       if (error.message) toast.error(error.message)
       else if(error.cause) toast.error(getErrorMessage(error.cause))
     }
-  }, [updatePassword])
+  }, [navigate, updatePassword])
 
   return <Container>
     <h1>Update password</h1>

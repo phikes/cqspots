@@ -41,10 +41,10 @@ export const EditSpot = () => {
       }
       else if (response?.errors) toast.error(response?.errors.join(", "))
       else toast.error("Something went wrong")
-    } catch (error: any) {
+    } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
       toast.error(error.toString())
     }
-  }, [updateSpot])
+  }, [queryRef, navigate, updateSpot])
 
   return <>
   <div className="d-flex mb-3">

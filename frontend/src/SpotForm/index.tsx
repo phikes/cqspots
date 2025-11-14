@@ -92,7 +92,7 @@ export const SpotForm = ({onSubmit, spotRef}: Props) => {
     table: spot?.table ?? false,
     trees: spot?.trees ?? false,
     wheelchairAccessible: spot?.wheelchairAccessible ?? false
-  }), [])
+  }), [spot])
 
   const latId = useId()
   const longId = useId()

@@ -32,5 +32,5 @@ export const useDeleteSpot = () => {
       }
     })),
     loading
-  ] as const, [loading])
+  ] as const, [loading, deleteSpot])
 }

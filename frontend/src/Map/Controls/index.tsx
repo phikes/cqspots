@@ -29,14 +29,14 @@ export const Controls = ({viewerRef}: Props) => {
     try {
       await logout()
       window.location.reload()
-    } catch (error: any) {
+    } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
       if (error.message) toast.error(error.message)
       else if (error.cause) toast.error(getErrorMessage(error.cause))
     }
-  }, [])
+  }, [logout])
 
   const navigate = useNavigate()
-  const navigateLogin = useCallback(() => navigate("/login"), [])
+  const navigateLogin = useCallback(() => navigate("/login"), [navigate])
 
   return <div className="leaflet-control-container">
     <div className="leaflet-top leaflet-right">

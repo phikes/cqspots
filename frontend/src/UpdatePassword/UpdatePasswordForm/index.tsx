@@ -44,7 +44,7 @@ export const UpdatePasswordForm = ({onSubmit}: Props) => {
 
     toast("Missing token")
     navigate("/login")
-  }, [searchParams])
+  }, [navigate, searchParams])
 
   return <Formik initialValues={initialValues} onSubmit={loadingOnSubmit} validationSchema={validationSchema}>
     {

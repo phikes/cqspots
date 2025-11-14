@@ -36,7 +36,7 @@ export const User = () => {
       toast.success("You need to be logged in in order to view this page")
       navigate("/login")
     }
-  }, [viewer])
+  }, [navigate, viewer])
 
   const doLogout = useCallback(async () => {
     if (!confirm("Are you sure you want to log out?")) return
@@ -44,7 +44,7 @@ export const User = () => {
     try {
       await logout()
       window.location.assign("/")
-    } catch (error: any) {
+    } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
       if (error.message) toast.error(error.message)
       else if (error.cause) toast.error(getErrorMessage(error.cause))
     }

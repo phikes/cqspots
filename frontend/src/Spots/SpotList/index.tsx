@@ -54,7 +54,7 @@ export const SpotList = ({spotsRef}: Props) => {
     if (deleteLoading) return
 
     setDeletingSpot(null)
-  })
+  }, [deleteLoading])
 
   return <table className="table">
     <thead>

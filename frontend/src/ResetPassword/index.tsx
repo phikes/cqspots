@@ -17,7 +17,7 @@ export const ResetPassword = () => {
       await resetPassword(values)
       setSuccess(true)
       formikRef.current?.resetForm()
-    } catch (error: any) {
+    } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
       toast.error(error.message)
     }
   }, [resetPassword])

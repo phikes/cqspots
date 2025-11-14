@@ -24,7 +24,7 @@ export const UpdateUser = ({viewerRef}: Props) => {
     try {
       await updateUser(values)
       window.location.reload()
-    } catch (error: any) {
+    } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
       if (error.message) toast.error(error.message)
       else if (error.cause) toast.error(getErrorMessage(error.cause))
     }

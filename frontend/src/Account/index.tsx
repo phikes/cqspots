@@ -26,7 +26,7 @@ export const Account = () => {
     try {
       await deleteAccount()
       window.location.assign("/")
-    } catch (error: any) {
+    } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
       if (error.message) toast.error(error.message)
       else if (error.cause) toast.error(getErrorMessage(error.cause))
     }

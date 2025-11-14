@@ -20,10 +20,10 @@ export const AddSpot = () => {
       if (response?.spot) navigate("/user/spots")
       else if (response?.errors) toast.error(response?.errors.join(", "))
       else toast.error("Something went wrong")
-    } catch (error: any) {
+    } catch (error: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
       toast.error(error.toString())
     }
-  }, [createSpot])
+  }, [createSpot, navigate])
 
   return <>
   <div className="d-flex mb-3">

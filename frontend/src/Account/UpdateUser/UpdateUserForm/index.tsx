@@ -47,7 +47,7 @@ export const UpdateUserForm = ({onSubmit, viewerRef}: Props) => {
     callsign: viewer.callsign ?? "",
     email: viewer.email,
     currentPassword: ""
-  }), [])
+  }), [viewer])
 
   return <Formik initialValues={initialValues} onSubmit={loadingOnSubmit} validationSchema={validationSchema}>
     {
