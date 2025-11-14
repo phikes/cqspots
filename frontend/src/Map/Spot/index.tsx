@@ -74,7 +74,7 @@ export const Spot = ({ spotRef }: Props) => {
 <DiscussionEmbed
   config={{
     identifier: spot.id,
-    url: "https://cqspots.com",
+    url: `https://cqspots.com?spot=${spot.id}`,
   }}
   shortname="cqspots"
 />
