@@ -14,6 +14,17 @@ import { Account, query as accountQuery } from "./Account"
 import { Spots, query as spotsQuery } from "./Spots"
 import { AddSpot } from "@/AddSpot"
 import { EditSpot, query as EditSpotQuery } from "./EditSpot"
+import L from "leaflet"
+
+import icon from 'leaflet/dist/images/marker-icon.png'
+import iconShadow from 'leaflet/dist/images/marker-shadow.png'
+
+let DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow
+})
+
+L.Marker.prototype.options.icon = DefaultIcon
 
 const router = createBrowserRouter([
   {
@@ -42,7 +53,7 @@ const router = createBrowserRouter([
     id: "user",
     Component: User,
     loader: async () => loadQuery(environment, userQuery, {}),
-    children: [
+      children: [
       {
         path: "/user/spots/add",
         Component: AddSpot,
@@ -52,16 +63,16 @@ const router = createBrowserRouter([
         Component: EditSpot,
         loader: async ({ params: {id} }) => loadQuery(environment, EditSpotQuery, {id}),
       },
-      {
-        path: "/user/spots",
-        Component: Spots,
-        loader: async () => loadQuery(environment, spotsQuery, {}),
-      },
-      {
-        path: "/user/account",
-        Component: Account,
-        loader: async () => loadQuery(environment, accountQuery, {}),
-      }
+        {
+          path: "/user/spots",
+          Component: Spots,
+          loader: async () => loadQuery(environment, spotsQuery, {}),
+        },
+          {
+            path: "/user/account",
+            Component: Account,
+            loader: async () => loadQuery(environment, accountQuery, {}),
+          }
     ]
   }
 ])
