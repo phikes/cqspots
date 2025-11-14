@@ -48,7 +48,9 @@ fragment MapQueryFragment on Query
 }
 `
 
-const getColorFromReferences = (references: string[]) => {
+const getColorFromReferences = (references: readonly string[] | null | undefined): string => {
+  if (!references) return ""
+
   switch(references.length) {
     case 0:
       return "blue"
