@@ -41,29 +41,11 @@ fragment MapQueryFragment on Query
           x
           y
         }
-        references
       }
     }
   }
 }
 `
-
-const getColorFromReferences = (references: readonly string[] | null | undefined): string => {
-  if (!references) return ""
-
-  switch(references.length) {
-    case 0:
-      return "blue"
-    case 1:
-      return "#f8ca00"
-    case 2:
-      return "#e97f02"
-    case 3:
-      return "#bd1550"
-    default:
-      return "#490a3d"
-  }
-}
 
 export const Map = () => {
   const queryRef = usePreloadedQuery<MapQueryType>(query, useLoaderData())
@@ -94,7 +76,7 @@ export const Map = () => {
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {
-        spots?.map(({node, node: { id, lonlat: { x, y }, references }}) =>
+        spots?.map(({node, node: { id, lonlat: { x, y } }}) =>
         <CircleMarker
           key={id}
           eventHandlers={{
@@ -102,7 +84,6 @@ export const Map = () => {
           }}
           center={[y, x]}
           radius={5}
-          color={getColorFromReferences(references)}
           fillOpacity={0.9}>
           <Popup
             maxWidth={600}>

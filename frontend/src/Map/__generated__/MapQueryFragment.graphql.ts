@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<bf2dce608d8c50809346c70a3324f05b>>
+ * @generated SignedSource<<6a976bcace958b7d3ee6a310b0379c47>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -19,7 +19,6 @@ export type MapQueryFragment$data = {
           readonly x: number;
           readonly y: number;
         };
-        readonly references: ReadonlyArray<string> | null | undefined;
         readonly " $fragmentSpreads": FragmentRefs<"SpotFragment">;
       };
     }>;
@@ -140,13 +139,6 @@ return {
                   "alias": null,
                   "args": null,
                   "kind": "ScalarField",
-                  "name": "references",
-                  "storageKey": null
-                },
-                {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
                   "name": "__typename",
                   "storageKey": null
                 }
@@ -197,6 +189,6 @@ return {
 };
 })();
 
-(node as any).hash = "ae7befc7d0c251c5c8d7dd91aa5e9828";
+(node as any).hash = "89e0f29afd995c2946f422eec2a78f31";
 
 export default node;
