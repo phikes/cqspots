@@ -81,7 +81,7 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    url: <%= ENV["DATABASE_URL"] %>
+    url: <%= ENV.fetch("DATABASE_URL", "").sub(/^postgres/, "postgis") %>
   cache:
     <<: *primary_production
     database: cqspots_production_cache
