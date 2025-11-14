@@ -78,7 +78,7 @@ export const Map = () => {
       {
         spots?.map(({node, node: { id, lonlat: { x, y } }}) =>
         <CircleMarker
-          key={[x, y].join(",")}
+          key={id}
           eventHandlers={{
             click: () => setSelectedSpotId(id)
           }}
