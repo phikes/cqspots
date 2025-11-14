@@ -33,7 +33,8 @@ fragment SpotsQueryFragment on Query
 
 export const Spots = () => {
   const queryRef = usePreloadedQuery<SpotsQuery>(query, useLoaderData())
-  const {data: { viewer: {spots: { edges: spots }} }, loadNext, hasNext} = usePaginationFragment<SpotsQuery, SpotsQueryFragment$key>(queryFragment, queryRef)
+  const {data: { viewer }, loadNext, hasNext} = usePaginationFragment<SpotsQuery, SpotsQueryFragment$key>(queryFragment, queryRef)
+  const spots = viewer?.spots?.edges
 
   useEffect(() => {
     loadNext(500)
@@ -45,6 +46,6 @@ export const Spots = () => {
       <FaPlus />
       Add spot
     </NavLink>
-    <SpotList spotsRef={spots} />
+    {spots && <SpotList spotsRef={spots} />}
 </div>
 }
