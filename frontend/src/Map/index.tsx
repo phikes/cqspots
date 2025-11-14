@@ -6,7 +6,7 @@ import { CircleMarker, MapContainer, Popup, TileLayer } from "react-leaflet"
 import { usePaginationFragment, usePreloadedQuery } from "react-relay"
 import { useLoaderData } from "react-router"
 import { type MapQuery, type MapQuery as MapQueryType } from "./__generated__/MapQuery.graphql"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Spot } from "./Spot"
 import { DataLoading } from "./DataLoading"
 import { Search } from "@/Search"
@@ -36,6 +36,7 @@ fragment MapQueryFragment on Query
     edges {
       node {
         ...SpotFragment
+        id
         lonlat {
           x
           y
@@ -50,6 +51,8 @@ export const Map = () => {
   const queryRef = usePreloadedQuery<MapQueryType>(query, useLoaderData())
   const {data: {spots: { edges: spots }}, loadNext, hasNext, isLoadingNext} = usePaginationFragment<MapQuery, MapQueryFragment$key>(queryFragment, queryRef)
 
+  // this might be fragile, but it helps to render only one disqus embed (more than one leads to bugs)
+  const [selectedSpotId, setSelectedSpotId] = useState<string>()
   useEffect(() => {
     loadNext(500)
   }, [hasNext, loadNext])
@@ -73,15 +76,18 @@ export const Map = () => {
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {
-        spots?.map(({node, node: { lonlat: { x, y } }}) =>
+        spots?.map(({node, node: { id, lonlat: { x, y } }}) =>
         <CircleMarker
           key={[x, y].join(",")}
+          eventHandlers={{
+            click: () => setSelectedSpotId(id)
+          }}
           center={[y, x]}
           radius={5}
           fillOpacity={0.9}>
           <Popup
             maxWidth={600}>
-            <Spot spotRef={node} />
+            {selectedSpotId === id && <Spot spotRef={node} />}
           </Popup>
         </CircleMarker>
       )

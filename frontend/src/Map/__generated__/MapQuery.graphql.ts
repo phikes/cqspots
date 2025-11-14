@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<41408b63d08fe248c39b29cd8accc1d9>>
+ * @generated SignedSource<<b573c0d6afb169cc3ff21ac3318a6998>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -306,12 +306,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "6a4934e20a8a1b28d06ac7a0b4f3e6a8",
+    "cacheID": "b6eee66939eb44bc50b0aaacfb4a42c6",
     "id": null,
     "metadata": {},
     "name": "MapQuery",
     "operationKind": "query",
-    "text": "query MapQuery {\n  ...MapQueryFragment\n  viewer {\n    ...ControlsViewerFragment\n  }\n}\n\nfragment ControlsViewerFragment on User {\n  callsign\n  email\n}\n\nfragment MapQueryFragment on Query {\n  spots(first: 500) {\n    edges {\n      node {\n        ...SpotFragment\n        lonlat {\n          x\n          y\n        }\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SpotFragment on Spot {\n  childFriendly\n  crowded\n  description\n  id\n  parking\n  references\n  rocky\n  scenic\n  sheltered\n  sitting\n  table\n  trees\n  user {\n    callsign\n  }\n  wheelchairAccessible\n}\n"
+    "text": "query MapQuery {\n  ...MapQueryFragment\n  viewer {\n    ...ControlsViewerFragment\n  }\n}\n\nfragment ControlsViewerFragment on User {\n  callsign\n  email\n}\n\nfragment MapQueryFragment on Query {\n  spots(first: 500) {\n    edges {\n      node {\n        ...SpotFragment\n        id\n        lonlat {\n          x\n          y\n        }\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment SpotFragment on Spot {\n  childFriendly\n  crowded\n  description\n  id\n  parking\n  references\n  rocky\n  scenic\n  sheltered\n  sitting\n  table\n  trees\n  user {\n    callsign\n  }\n  wheelchairAccessible\n}\n"
   }
 };
 })();

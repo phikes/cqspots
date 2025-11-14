@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<6bf85fc5845219f5a5dac7ea12545412>>
+ * @generated SignedSource<<6a976bcace958b7d3ee6a310b0379c47>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -14,6 +14,7 @@ export type MapQueryFragment$data = {
   readonly spots: {
     readonly edges: ReadonlyArray<{
       readonly node: {
+        readonly id: string;
         readonly lonlat: {
           readonly x: number;
           readonly y: number;
@@ -105,6 +106,13 @@ return {
                 {
                   "alias": null,
                   "args": null,
+                  "kind": "ScalarField",
+                  "name": "id",
+                  "storageKey": null
+                },
+                {
+                  "alias": null,
+                  "args": null,
                   "concreteType": "Point",
                   "kind": "LinkedField",
                   "name": "lonlat",
@@ -181,6 +189,6 @@ return {
 };
 })();
 
-(node as any).hash = "40d4cba01719d7bbbc90676853370059";
+(node as any).hash = "89e0f29afd995c2946f422eec2a78f31";
 
 export default node;
